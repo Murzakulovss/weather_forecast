@@ -5,8 +5,10 @@ from drf_spectacular.utils import extend_schema
 from .services.weather_api import get_weather
 from drf_spectacular.utils import OpenApiParameter, OpenApiTypes
 from .serializers import WeatherSerializer, ErrorSerializer
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
-
+@method_decorator(cache_page(60 * 10), name='get')
 class WeatherAPIView(APIView):
 
     @extend_schema(
