@@ -19,6 +19,7 @@ def get_weather(city: str ):
             "city": data["name"],
             "temperature": data["main"]["temp"],
             "description": data["weather"][0]["description"],
+            "feels_like": data["main"]["feels_like"],
             "icon": f"https://openweathermap.org/img/wn/{data['weather'][0]['icon']}@2x.png"
         }
     elif response.status_code == 401:

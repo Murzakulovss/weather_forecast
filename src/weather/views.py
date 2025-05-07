@@ -4,7 +4,8 @@ from rest_framework import status
 from drf_spectacular.utils import extend_schema
 from .services.weather_api import get_weather
 from drf_spectacular.utils import OpenApiParameter, OpenApiTypes
-from .serializers import WeatherSerializer
+from .serializers import WeatherSerializer, ErrorSerializer
+
 
 class WeatherAPIView(APIView):
 
@@ -21,7 +22,8 @@ class WeatherAPIView(APIView):
         ],
         responses={
             200: WeatherSerializer,
-            404: OpenApiTypes.OBJECT
+            404: ErrorSerializer,
+            429: ErrorSerializer
         }
     )
     def get(self, request):
