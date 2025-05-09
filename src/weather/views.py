@@ -1,5 +1,7 @@
 from rest_framework import status
 from drf_spectacular.utils import extend_schema
+from rest_framework.exceptions import ValidationError
+
 from .services.weather_api import get_weather
 from drf_spectacular.utils import OpenApiParameter, OpenApiTypes
 from .serializers import WeatherSerializer, ErrorSerializer
@@ -57,6 +59,10 @@ class UserCityCreateView(APIView):
         responses={201: UserCityCreateSerializer}  # указываем сериализатор для успешного ответа
     )
     def post(self, request):
+        city_name = request.data.get("city")
+
+        if UserCity.objects.filter(user=request.user, city=city_name).exists():
+            raise ValidationError({"city": "This city is already added."})
         serializer = UserCityCreateSerializer(data=request.data)
 
         if serializer.is_valid():
