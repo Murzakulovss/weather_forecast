@@ -31,6 +31,5 @@ def get_weather(city: str ):
     elif response.status_code in(500,502,503):
         return {"error": "Weather service unavailable"}
 
-get_weather("Bishkek")
 
 

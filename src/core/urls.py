@@ -19,13 +19,15 @@ from django.shortcuts import redirect
 from django.urls import path, include
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
-from weather.views import WeatherAPIView
+from weather.views import WeatherAPIView, UserCityListView, UserCityCreateView
 
 urlpatterns = [
     path('', lambda request: redirect('/api/weather/?city=Bishkek')),
-    path('admin4/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('schema/', SpectacularAPIView.as_view(), name='schema'),
     path('swagger',SpectacularSwaggerView.as_view(url_name='schema') ),
     path("api/weather/", WeatherAPIView.as_view()),
+    path("user/cities/", UserCityListView.as_view(), name="user-cities"),
+    path("user/cities/create/", UserCityCreateView.as_view(), name="user-cities-create"),
     path("", include("weather.urls")),
 ]

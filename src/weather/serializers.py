@@ -1,4 +1,6 @@
 from rest_framework import serializers
+from rest_framework import serializers
+from .models import UserCity
 
 class WeatherSerializer(serializers.Serializer):
     city = serializers.CharField()
@@ -10,3 +12,13 @@ class WeatherSerializer(serializers.Serializer):
 
 class ErrorSerializer(serializers.Serializer):
     error = serializers.CharField()
+
+class UserCitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserCity
+        fields = ['id', 'city']
+
+class UserCityCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserCity
+        fields = ['city']
