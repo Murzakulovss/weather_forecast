@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from rest_framework import serializers
 from .models import UserCity
 
 class WeatherSerializer(serializers.Serializer):
@@ -19,6 +18,11 @@ class UserCitySerializer(serializers.ModelSerializer):
         fields = ['id', 'city']
 
 class UserCityCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserCity
+        fields = ['city']
+
+class UserCityUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserCity
         fields = ['city']
