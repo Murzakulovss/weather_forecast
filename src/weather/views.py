@@ -58,8 +58,8 @@ class UserCityCreateView(APIView):
     permission_classes = [IsAuthenticated]
 
     @extend_schema(
-        request=UserCityCreateSerializer,  # указываем сериализатор для тела запроса
-        responses={201: UserCityCreateSerializer}  # указываем сериализатор для успешного ответа
+        request=UserCityCreateSerializer,
+        responses={201: UserCityCreateSerializer}
     )
     def post(self, request):
         city_name = request.data.get("city")
